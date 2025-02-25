@@ -1,4 +1,5 @@
 # Reinforcement Learning Miniprojects
+Assignments and such from CSCI181V with Professor David Bachman at Pitzer College, Spring '25.
 
 `01-q-table`: Q-table, MiniPacMan with frozen ghost
 
