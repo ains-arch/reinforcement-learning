@@ -1,0 +1,54 @@
+% mybeamerstyle.sty
+\ProvidesPackage{vergestyle}[2025/04/08 Custom Beamer Style]
+
+% Optional: Theme adjustments
+\usetheme{CambridgeUS} % theme for fun boxes
+\usecolortheme{rose} % color theme for nearly transparent block titles and bodies
+\setbeamercovered{transparent} % show covered items
+
+% Set fonts for title and subtitle (bold sans-serif)
+\setbeamerfont{title}{family=\sffamily,series=\bfseries}
+\setbeamerfont{subtitle}{family=\sffamily,series=\bfseries}
+
+% Define custom colors
+\definecolor{blurple}{RGB}{81,0,255}
+\definecolor{darkblurple}{RGB}{56,0,179}
+\definecolor{franklin}{RGB}{59,255,208}
+\definecolor{pernod}{RGB}{214,243,31}
+\definecolor{hotbrick}{RGB}{255,61,0}
+\definecolor{pep}{RGB}{255,194,231}
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{black}{RGB}{19,19,19}
+
+% Set color theme
+\usecolortheme[named=blurple]{structure}
+\setbeamercolor*{palette primary}{bg=pernod, fg=black}
+\setbeamercolor*{palette secondary}{bg=blurple, fg=white}
+\setbeamercolor*{palette tertiary}{bg=franklin, fg=black}
+\setbeamercolor*{palette quaternary}{bg=pep, fg=black}
+\setbeamercolor*{titlelike}{bg=blurple, fg=white}
+\setbeamercolor{frametitle}{bg=blurple, fg=white}
+\setbeamercolor*{normal text}{fg=black}
+\setbeamercolor*{example text}{fg=darkblurple}
+\setbeamercolor*{separation line}{fg=franklin}
+\setbeamercolor*{item}{fg=blurple,bg=darkblurple}
+\setbeamercolor*{caption name}{fg=hotbrick}
+
+% Set frame font (use sans-serif for frame titles)
+\setbeamerfont{frametitle}{family=\sffamily}
+\setbeamerfont{title}{family=\sffamily,series=\bfseries}
+\setbeamerfont{subtitle}{family=\sffamily,series=\bfseries}
+
+% Set custom colors and fonts
+\usepackage{graphicx, hyperref, multicol}
+\usepackage{mathtools, amssymb}
+\usepackage{overpic}
+
+
+\endinput
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    urlcolor=franklin
+}

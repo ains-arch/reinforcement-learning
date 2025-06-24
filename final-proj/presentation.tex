@@ -1,0 +1,138 @@
+\documentclass[10pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx, hyperref, multicol}
+\usepackage {mathtools, amssymb}
+\usepackage{overpic}
+\usepackage{outlines}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  natbib=true
+]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{vergestyle}
+
+% Define theorems
+\newtheorem{question}{Question}
+\newtheorem{formula}{Formula}
+\newtheorem{answer}{Answer}
+\newtheorem{potanswer}{Potential Answers}
+\newtheorem{remedy}{Remedy}
+
+% Define shortcuts
+\DeclareMathOperator{\CP2}{\mathbb{C}P^2}
+\DeclareMathOperator{\CPo}{\mathbb{C}P^1}
+\newcommand{\C}{\mathbb{C}}
+\DeclareMathOperator{\barCP2}{\overline{\mathbb{C}P^2}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\R}{\mathbb{R}}
+\DeclareMathOperator{\op}{\operatorname}
+
+%------------------------------------------------------------
+
+% Information on the title page and running footer
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\title[HITS Algorithm]{Hyperlink-Induced Topic Search}
+% \subtitle{}
+\author[Ainslee Archibald]{Ainslee Archibald\\
+Data Science, Senior}
+\institute[Pitzer College]{Pitzer College}
+\date[May 5th, 2025]{Graph Algorithms\\Spring 2025}
+
+%------------------------------------------------------------
+
+\title{Reinforcement Learning for Simple Spelling Correction}
+\author{Ainslee Archibald}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{\frametitle{Problem Statement}
+\begin{itemize}
+    \item Goal: Train an RL agent to correct a scrambled 5-letter target word ("hello").
+    \item Task: Starting from a slightly misspelled version, the agent must learn a sequence of actions to reach the correct spelling.
+    \item Motivation: A simplified environment to explore fundamental RL concepts in a discrete action and observation space.
+\end{itemize}
+}
+
+\frame{\frametitle{Environment Specifications}
+\begin{itemize}
+    \item Target Word: "hello" (fixed).
+    \item Observation Space: A vector of 5 integers, each representing a letter's position in the alphabet (1-26).
+    \item Action Space: 10 discrete actions:
+    \begin{itemize}
+        \item Actions 0-4: Decrement the letter at the corresponding position.
+        \item Actions 5-9: Increment the letter at the corresponding position.
+    \end{itemize}
+    \item Choice Justification:
+    \begin{itemize}
+        \item Discrete and bounded spaces simplify the learning task for initial exploration.
+        \item Direct manipulation of letter positions provides a clear and interpretable action space.
+    \end{itemize}
+\end{itemize}
+}
+
+\frame{\frametitle{Environment Dynamics}
+\textbf{Observation:} Current 5-letter word state (e.g., $[8, 5, 12, 12, 1]$ for "hello").
+
+\textbf{Actions:} Selecting an action modifies one letter in the current word by incrementing or decrementing its alphabetical position (with wrap-around, e.g., 'a' decrements to 'z').
+
+\textbf{Reward Function:}
+\begin{itemize}
+    \item +10 for reaching the target word "hello".
+    \item +1 if the current distance is less than the previous step's distance
+    \item -0.2 if the current distance is farther than the previous step's distance
+    \item -0.01 penalty per step.
+\end{itemize}
+
+\textbf{Termination Conditions:}
+\begin{itemize}
+    \item Episode terminates successfully when the agent spells "hello".
+    \item Episode also terminates if a maximum of 5 steps is reached.
+\end{itemize}
+}
+
+\frame{\frametitle{Environment Demo (On the Board)}
+}
+
+\frame{\frametitle{Learning Algorithm: Proximal Policy Optimization (PPO)}
+\begin{itemize}
+    \item An actor-critic policy gradient algorithm.
+    \item \textbf{Actor:} Learns a policy $\pi(a|s)$ that maps states to probability distributions over actions.
+    \item \textbf{Critic:} Learns a value function $V(s)$ that estimates the expected future reward from a given state.
+    \item PPO uses a clipped surrogate objective to ensure stable policy updates.
+    \item This helps prevent large policy changes that could destabilize learning.
+    \item The algorithm balances exploration (trying new actions) and exploitation (taking actions that have worked well in the past).
+\end{itemize}
+}
+
+\frame{\frametitle{Results}
+}
+
+\frame{\frametitle{Future Directions}
+\begin{itemize}
+    \item \textbf{More Complex Target Words:} Increasing the length and complexity of the target word.
+    \item \textbf{Larger Action Space:} Allowing for actions like swapping letters or inserting/deleting (which would require a different environment and potentially a different algorithm).
+    \item \textbf{Dynamic Scrambling:} Introducing more varied and challenging initial scrambled words.
+    \item \textbf{Curriculum Learning:} Gradually increasing the difficulty of the scrambling over training.
+    \item \textbf{Generalization:} Training on multiple target words and evaluating the agent's ability to learn to spell new words.
+\end{itemize}
+}
+
+\end{document}
